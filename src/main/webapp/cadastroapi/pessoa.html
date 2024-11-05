@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Cadastro</h1>
+	<div id="resposta"></div>
+
+	<script>
+		document.getElementById("resposta").innerHTML = "aguarde... carregando...";
+		
+		fetch("../PessoaAPI")
+			.then(resp => resp.json())
+			.then(dados => mostrar(dados));
+
+		function mostrar(dados) {
+			var tab = "<table>"
+						+ "<th>id</th>"
+						+ "<th>nome</th>"
+						+ "<th>telefone</th>"
+						+ "<th>email</th>"
+						+ "<th>cidade</th>";
+			for (i in dados) {
+				tab += "<tr>"
+					 + "<td>" + dados[i].idpessoa + "</td>"
+					 + "<td>" + dados[i].nome + "</td>"
+					 + "<td>" + dados[i].telefone + "</td>"
+					 + "<td>" + dados[i].email + "</td>"
+					 + "<td>" + dados[i].cidade + "</td>"
+					 + "</tr>";
+			}
+			tab += "</table>";
+			document.getElementById("resposta").innerHTML = tab;
+		}
+		
+	</script>
+
+</body>
+</html>
